@@ -2,7 +2,7 @@ package com.cheetah.design.code.kata;
 
 
 import org.junit.Test;
-
+import static org.junit.Assert.assertEquals;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -49,5 +49,24 @@ public class Solution {
         assertArrayEquals(new String[]{"CoDeWaRs", "cOdEwArS"}, Solution.capitalize("codewars"));
         assertArrayEquals(new String[]{"AbRaCaDaBrA", "aBrAcAdAbRa"}, Solution.capitalize("abracadabra"));
         assertArrayEquals(new String[]{"CoDeWaRrIoRs", "cOdEwArRiOrS"}, Solution.capitalize("codewarriors"));
+    }
+
+
+    private static final String PART_STRING = " likes this";
+
+    public static String whoLikesIt(String... names) {
+       if(names.length <= 0) return "no one"+PART_STRING;
+       if(names.length == 1) return names[0]+ PART_STRING;
+
+       return "";
+    }
+
+    @Test
+    public void staticTests() {
+        assertEquals("no one likes this", Solution.whoLikesIt());
+        assertEquals("Peter likes this", Solution.whoLikesIt("Peter"));
+        assertEquals("Jacob and Alex like this", Solution.whoLikesIt("Jacob", "Alex"));
+        assertEquals("Max, John and Mark like this", Solution.whoLikesIt("Max", "John", "Mark"));
+        assertEquals("Alex, Jacob and 2 others like this", Solution.whoLikesIt("Alex", "Jacob", "Mark", "Max"));
     }
 }

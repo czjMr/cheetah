@@ -16,6 +16,7 @@ public class Application {
 
     @GetMapping("/")
     public String hi() throws InterruptedException {
+
         return "hello word";
     }
 

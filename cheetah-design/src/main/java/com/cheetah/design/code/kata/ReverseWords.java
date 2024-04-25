@@ -4,16 +4,19 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
 public class ReverseWords {
 
     public static String reverseWords(final String original) {
-        return Arrays.stream(original.split("(?<=\\s)|(?=\\s+)")).map(ReverseWords::reverseOneWordsByBuilder).collect(Collectors.joining());
+        return Arrays.stream(original.split("(?<=\\s)|(?=\\s+)"))
+                .map(ReverseWords::reverseOneWordsByBuilder)
+                .collect(Collectors.joining());
     }
 
     private static String reverseOneWordsByBuilder(String words) {
@@ -28,7 +31,6 @@ public class ReverseWords {
             reverseChars[z++] = chars[i];
         }
         return String.valueOf(reverseChars);
-
     }
 
     public static String reverseWordsClever(final String original)
@@ -38,11 +40,13 @@ public class ReverseWords {
                 .collect(Collectors.joining());
     }
 
-    private static List<Character> toCharacterList(char[] chars) {
+    private static List<Character> toCharacterList(char ... chars) {
         List<Character> list = new ArrayList<>(chars.length);
         for (char aChar : chars) {
             list.add(aChar);
         }
+
+       //return Stream.of(chars).flatMap(Arrays.stream(new char[4])).collect(Collectors.toList());
         return list;
     }
 
