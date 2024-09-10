@@ -19,8 +19,13 @@ public class CheetahAlgorihmApplication {
 
     public static void main(String[] args){
 
+        ListNode listNode = new ListNode(1, new ListNode(2, new ListNode(3, null)));
+        reverseList(listNode);
 //        int[] nums = new int[]{100,4,200,1,3,2};
 //        longestConsecutive(nums);
+        var result = stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"});
+
+
         gimmeTheLetters("a-z");
         encode("Prespecialized");
         top3("'a 'A 'a' a'A' a'a'!");
@@ -208,8 +213,57 @@ public class CheetahAlgorihmApplication {
 
     public static String stripComments(String text, String[] commentSymbols) {
 
-        return "";
+        for (String commentSymbol : commentSymbols) {
+            int start = text.indexOf(commentSymbol);
+            int  end = text.indexOf("\n",start);
+            String startStr = "";
+            String endStr = "";
+            if(start != -1) {
+                startStr = text.substring(0,start);
+            }
+            if(end != -1) {
+                endStr = text.substring(end);
+            }
+            text = startStr + endStr;
+        }
+        return text.trim();
+
     }
 
+
+
+
+    public static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+
+    }
+
+
+    public static class ListNode {
+     int val;
+     ListNode next;
+     ListNode(int x) {
+          val = x;
+          next = null;
+     }
+     ListNode(int val, ListNode next) {
+         this.val = val;
+         this.next = next;
+     }
+  }
+
+
+
+    public int mostWordsFound(String[] sentences) {
+        return Stream.of(sentences).mapToInt(item -> item.split(" ").length).max().orElse(0);
+    }
 
 }
